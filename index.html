@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<h1 id="h1">Hello World!</h1>
+We are using node
+<script>
+  document.write(process.versions.node)
+</script>
+<p id="Chrome">
+	Chrome
+</p>
+<script>
+  document.write(process.versions.chrome)
+</script>,
+and Electron
+<script>
+  document.write(process.versions.electron)
+</script>
+<a href="http://www.baidu.com" target="_self">百毒</a>
+<script>
+  const { ipcRenderer, remote } = require('electron');
+  const { dialog } = remote;
+  window.localStorage.setItem('name', 'wxr');
+  const h1 = document.getElementById('h1');
+  const chrome = document.getElementById('Chrome');
+
+  ipcRenderer.on('something', (event, message) => {
+    console.log(message) // 主进程发送到渲染进程的数据
+  })
+
+	h1.addEventListener('click', () => {
+    // console.log(ipcRenderer);
+		const res = ipcRenderer.sendSync('synchronous-message', 'ping');
+    console.log(res) // prints "pong"
+
+    ipcRenderer.on('asynchronous-reply', (event, arg) => {
+      console.log(arg) // prints "pong"
+    })
+    ipcRenderer.send('asynchronous-message', 'async')
+	}, false);
+  chrome.addEventListener('click', () => {
+    dialog.showMessageBox({type: 'info', message: '在渲染进程中直接使用主进程的模块'})
+  }, false);
+</script>
+</body>
+</html>

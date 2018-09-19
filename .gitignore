@@ -1,0 +1,15 @@
+.DS_Store
+public/
+node_modules/
+*.swp
+*.log
+*.lock
+.idea/
+.happypack/
+mockServer/node_modules/
+*.Thumbs.db
+dist/
+.uglifyJsCache
+stats.json
+Thumbs.db
+
