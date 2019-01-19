@@ -20,7 +20,7 @@ and Electron
 <script>
   document.write(process.versions.electron)
 </script>
-<a href="http://www.baidu.com" target="_self">百毒</a>
+<!--<a href="http://www.baidu.com" target="_self">百毒</a>-->
 <script>
   const { ipcRenderer, remote } = require('electron');
   const { dialog } = remote;
@@ -28,7 +28,7 @@ and Electron
   const h1 = document.getElementById('h1');
   const chrome = document.getElementById('Chrome');
 
-  ipcRenderer.on('something', (event, message) => {
+  ipcRenderer.on('main2render', (event, message) => {
     console.log(message) // 主进程发送到渲染进程的数据
   })
 

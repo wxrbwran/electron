@@ -9,12 +9,13 @@ function createWindow() {
   win.webContents.openDevTools();
   win.on('closed', () => { win = null });
 
-  win.webContents.on('did-finish-load', () => {
-    // 发送数据给渲染程序
-    win.webContents.send('something', '主进程发送到渲染进程的数据')
-  })
   const menuBuilder = new MenuBuilder(win);
   menuBuilder.buildMenu();
+
+  win.webContents.on('did-finish-load', () => {
+    // 发送数据给渲染程序
+    win.webContents.send('main2render', '主进程发送到渲染进程的数据')
+  })
 }
 
 
